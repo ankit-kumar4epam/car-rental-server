@@ -5,7 +5,6 @@ const path = require("path");
 const { v4: uuidv4 } = require("uuid"); // UUID generation for unique IDs
 const { forEach } = require("lodash");
 const app = express();
-const PORT = 8080;
 const BASE_PATH = "./data"; // Directory for storing JSON files
 
 app.use(cors());
@@ -369,9 +368,11 @@ app.get("/api/v1/feedbacks/recent", (req, res) => {
 // -----------------------------------
 // Server setup
 // -----------------------------------
-const port = process.env.PORT || 10000;
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Server running on port ${port}`);
+const HOST = process.env.HOST || '127.0.0.1';
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, HOST, () => {
+  console.log(`Server running on http://${HOST}:${PORT}`);
 });
 
 
