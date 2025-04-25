@@ -38,17 +38,22 @@ const ABOUT_US_FILE = [
   {
     "title": "Years in Business",
     "numericValue": 15,
-    "description": "We have been delivering outstanding services for 15 years."
-  },
-  {
-    "title": "Satisfied Clients",
-    "numericValue": 500,
-    "description": "We have served over 500 happy clients worldwide."
+    "description": "In car rentals highlights a steadfast commitment to excellence, marked by a track record of trust and satisfaction among thousands of clients worldwide."
   },
   {
     "title": "Locations",
-    "numericValue": 20,
-    "description": "Operating in 20 different locations globally."
+    "numericValue": 6,
+    "description": "We make car rentals accessible and convenient for customers no matter where their travels take them, ensuring quality service and easy access."
+  },
+  {
+    "title": "Car Brands",
+    "numericValue": 25,
+    "description": "We cater to every kind of traveler, from business professionals to families and adventure seekers, ensuring the perfect vehicle is always available."
+  },
+  {
+    "title": "Cars",
+    "numericValue": "100+",
+    "description": "We cater to every kind of traveler, from business professionals to families and adventure seekers, ensuring the perfect vehicle is always available."
   }
 ];
 const FAQ = [
@@ -107,9 +112,14 @@ app.post("/api/v1/auth/sign-in", (req, res) => {
 
   const users = readData(USERS_FILE);
 
-  const user = users.find((u) => u.email === email && u.password === password);
+  let user = users.find((u) => u.email === email);
   if (!user) {
-    return res.status(400).json({ error: "Invalid email or password." });
+    return res.status(409).json({ message: "Email not registered" });
+  }
+
+  user = users.find((u) => u.email === email && u.password === password);
+  if (!user) {
+    return res.status(410).json({ message: "The password isn't correct. Check it and try again." });
   }
 
   const token = `token-${user.id}`;
