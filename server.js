@@ -369,8 +369,9 @@ app.get("/api/v1/feedbacks/recent", (req, res) => {
 // -----------------------------------
 // Server setup
 // -----------------------------------
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+const port = process.env.PORT || 10000;
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on port ${port}`);
 });
 
 
