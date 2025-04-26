@@ -368,12 +368,11 @@ app.get("/api/v1/feedbacks/recent", (req, res) => {
 // -----------------------------------
 // Server setup
 // -----------------------------------
-const HOST = process.env.HOST || '127.0.0.1';
-const PORT = process.env.PORT || 8080;
-
-app.listen(PORT, HOST, () => {
-  console.log(`Server running on http://${HOST}:${PORT}`);
+const PORT = process.env.PORT || 3000; // Vercel will set process.env.PORT dynamically
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
+
 
 
 //For debugging purpose
